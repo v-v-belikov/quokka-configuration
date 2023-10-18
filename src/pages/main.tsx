@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 
 import CitiesCard from '../components/cities-card';
 
@@ -5,11 +6,9 @@ type MainPageProps = {
   CountRentOffers: number;
 }
 
-function MainPage({CountRentOffers}:MainPageProps):JSX.Element {
-  const citiesCards:[] = [];
-  for (let index:number = 0; index < CountRentOffers; index++) {
-    citiesCards.push((<CitiesCard key={index} />));
-  }
+function MainPage({CountRentOffers}:MainPageProps) {
+  const citiesCards: JSX.Element[] = Array.from({length:CountRentOffers});
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -100,7 +99,7 @@ function MainPage({CountRentOffers}:MainPageProps):JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {citiesCards}
+                {citiesCards.map((_, index:number)=><CitiesCard key={index}/>)}
               </div>
             </section>
             <div className="cities__right-section">

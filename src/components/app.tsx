@@ -4,7 +4,7 @@ type AppProps = {
   CountRentOffers:number;
 }
 
-function App ({CountRentOffers}:AppProps):JSX.Element {
+function App ({CountRentOffers}: AppProps) {
   return (
     <MainPage CountRentOffers={CountRentOffers}/>
   );

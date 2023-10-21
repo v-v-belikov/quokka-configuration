@@ -32,7 +32,7 @@ function App ({CountRentOffers}: AppProps) {
           <Route
             path = {AppRoute.Favorites}
             element = {
-              <PrivateRoute authenticationCurrentStatus = {AuthenticationStatus.NotAuth}>
+              <PrivateRoute authenticationCurrentStatus = {AuthenticationStatus.Auth}>
                 <Favorites />
               </PrivateRoute>
             }

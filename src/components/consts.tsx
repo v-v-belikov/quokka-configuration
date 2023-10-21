@@ -5,7 +5,7 @@ const AppRoute = {
   Offer:'/offer',
 } as const;
 
-type AuthenticationStatus = 'AUTH'|'NOT_AUTH';
+type AuthenticationStatusType = 'AUTH'|'NOT_AUTH';
 
 const AuthenticationStatus = {
   Auth: 'AUTH',
@@ -13,3 +13,4 @@ const AuthenticationStatus = {
 } as const;
 
 export{AppRoute,AuthenticationStatus};
+export type {AuthenticationStatusType};

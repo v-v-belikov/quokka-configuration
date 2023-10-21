@@ -1,6 +1,8 @@
 /* eslint-disable react/no-array-index-key */
 
 import CitiesCard from '../components/cities-card';
+import { Helmet } from 'react-helmet-async';
+
 
 type MainPageProps = {
   CountRentOffers: number;
@@ -11,6 +13,9 @@ function MainPage({CountRentOffers}:MainPageProps) {
 
   return (
     <div className="page page--gray page--main">
+      <Helmet>
+        <title>{'6 cities'}</title>
+      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">

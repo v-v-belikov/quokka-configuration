@@ -6,13 +6,15 @@ import ErrorPage from './error-page';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppRoute } from './consts';
 import { HelmetProvider } from 'react-helmet-async';
+import { OfferType } from '../types';
 import PrivateRoute from '../components/privite-route';
 
 type AppProps = {
   countRentOffers: number;
+  mockData: OfferType[];
 };
 
-function App({ countRentOffers }: AppProps) {
+function App({ countRentOffers, mockData }: AppProps) {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -22,7 +24,7 @@ function App({ countRentOffers }: AppProps) {
             element={<MainPage countRentOffers={countRentOffers} />}
           />
           <Route path={AppRoute.Login} element={<Login />} />
-          <Route path={`${AppRoute.Offer}/:id`} element={<Offer />} />
+          <Route path={`${AppRoute.Offer}/:id`} element={<Offer />} mockData={mockData}/>
           <Route
             path={AppRoute.Favorites}
             element={

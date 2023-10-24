@@ -1,6 +1,7 @@
 import { Navigate } from 'react-router-dom';
-import { AppRoute, AuthenticationStatus, AuthenticationStatusType } from './consts';
+import { AppRoute } from './consts';
 
+type AuthenticationStatusType = 'AUTH'|'NOT_AUTH';
 
 type PriviteProps = {
   children: JSX.Element;
@@ -8,7 +9,7 @@ type PriviteProps = {
 }
 function PrivateRoute ({children, authenticationCurrentStatus}: PriviteProps) {
   return (
-    authenticationCurrentStatus === AuthenticationStatus.Auth
+    authenticationCurrentStatus === 'AUTH'
       ? children
       : <Navigate to = {AppRoute.Login}/>
   );

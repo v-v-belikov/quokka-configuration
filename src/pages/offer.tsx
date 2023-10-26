@@ -1,5 +1,9 @@
 import { Helmet } from 'react-helmet-async';
 
+// type OfferProps = {
+//   mockDataCard: object;
+// }
+
 function Offer () {
   return (
     <div className="page">

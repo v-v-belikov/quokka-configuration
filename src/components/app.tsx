@@ -15,6 +15,7 @@ type AppProps = {
 };
 
 function App({ countRentOffers, mockData }: AppProps) {
+  console.log(mockData);
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -24,7 +25,7 @@ function App({ countRentOffers, mockData }: AppProps) {
             element={<MainPage countRentOffers={countRentOffers} />}
           />
           <Route path={AppRoute.Login} element={<Login />} />
-          <Route path={`${AppRoute.Offer}/:id`} element={<Offer />} mockData={mockData}/>
+          <Route path={`${AppRoute.Offer}/:id`} element={<Offer />}/>
           <Route
             path={AppRoute.Favorites}
             element={

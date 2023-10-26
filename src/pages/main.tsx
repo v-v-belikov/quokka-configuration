@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 
-import CitiesCard from '../components/cities-card';
+
 import { Helmet } from 'react-helmet-async';
 
 type MainPageProps = {
@@ -8,7 +8,7 @@ type MainPageProps = {
 };
 
 function MainPage({ countRentOffers }: MainPageProps) {
-  const citiesCards = Array.from({ length: countRentOffers });
+  
 
   return (
     <div className="page page--gray page--main">
@@ -124,7 +124,7 @@ function MainPage({ countRentOffers }: MainPageProps) {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {citiesCards.map((_, index: number) => (<CitiesCard key={index} />))}
+                
               </div>
             </section>
             <div className="cities__right-section">

@@ -17,7 +17,7 @@ export type Host = {
 }
 
 export type OfferType = {
-  image: string|string[];
+  image: string;
   header: string;
   description: string;
   isPrime: boolean;
@@ -26,7 +26,7 @@ export type OfferType = {
   rating: number;
   bedroomQuantity: number;
   maxGuest: number;
-  costPerNight: string;
+  costPerNight: number;
   city: City;
   host: Host;
   reviews: number;

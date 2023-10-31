@@ -4,6 +4,7 @@ import MainLogoLink from '../components/main-logo-link';
 import { OfferType } from '../types';
 import { generatedOffers } from '../components/mocks/offers';
 import CardList from '../components/card-list';
+import { useParams } from 'react-router-dom';
 
 type OfferProps = {
   cardData: OfferType;
@@ -23,6 +24,9 @@ function Offer(props: OfferProps) {
     reviews,
     id,
   } = props.cardData;
+  const params = useParams();
+  const current = params.id;
+  console.log(current);
   return (
     <div className="page">
       <Helmet>

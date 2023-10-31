@@ -27,10 +27,8 @@ function App({ countRentOffers, mockData }: AppProps) {
           />
           <Route path={AppRoute.Login} element={<Login />} />
           <Route
-            path={`${AppRoute.Offer}id`}
-            element={generatedOffers.map((_, index) => (
-              <Offer cardData={mockData[index]} key={index} />
-            ))}
+            path={`${AppRoute.Offer}:id`}
+            element={<Offer cardData={mockData[1]} />}
           />
           <Route
             path={AppRoute.Favorites}

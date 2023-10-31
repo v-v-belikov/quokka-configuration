@@ -18,10 +18,11 @@ export type Host = {
 
 export type OfferType = {
   image: string;
+  smalllImage: string;
   header: string;
   description: string;
   isPrime: boolean;
-  isFavorit: boolean;
+  isFavourite: boolean;
   housingType: string;
   rating: number;
   bedroomQuantity: number;
@@ -31,4 +32,5 @@ export type OfferType = {
   host: Host;
   reviews: number;
   id: number;
-}
+};
+

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import MainPage from '../pages/main';
 import Login from '../pages/login';
 import Offer from '../pages/offer';
@@ -8,6 +9,7 @@ import { AppRoute } from './consts';
 import { HelmetProvider } from 'react-helmet-async';
 import { OfferType } from '../types';
 import PrivateRoute from '../components/privite-route';
+import { generatedOffers } from './mocks/offers';
 
 type AppProps = {
   countRentOffers: number;
@@ -15,7 +17,6 @@ type AppProps = {
 };
 
 function App({ countRentOffers, mockData }: AppProps) {
-  console.log(mockData);
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -25,13 +26,16 @@ function App({ countRentOffers, mockData }: AppProps) {
             element={<MainPage countRentOffers={countRentOffers} />}
           />
           <Route path={AppRoute.Login} element={<Login />} />
-          <Route path={`${AppRoute.Offer}/:id`} element={<Offer />}/>
+          <Route
+            path={`${AppRoute.Offer}id`}
+            element={generatedOffers.map((_, index) => (
+              <Offer cardData={mockData[index]} key={index} />
+            ))}
+          />
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute
-                authenticationCurrentStatus={'AUTH'}
-              >
+              <PrivateRoute authenticationCurrentStatus={'AUTH'}>
                 <Favorites />
               </PrivateRoute>
             }

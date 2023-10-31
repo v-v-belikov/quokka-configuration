@@ -1,15 +1,16 @@
 /* eslint-disable react/no-array-index-key */
 
-
+import { generatedOffers } from '../components/mocks/offers';
 import { Helmet } from 'react-helmet-async';
+import CardList from '../components/card-list';
+import LoginLink from '../components/login-link';
+import MainLogoLink from '../components/main-logo-link';
 
 type MainPageProps = {
   countRentOffers: number;
 };
 
 function MainPage({ countRentOffers }: MainPageProps) {
-  
-
   return (
     <div className="page page--gray page--main">
       <Helmet>
@@ -19,15 +20,7 @@ function MainPage({ countRentOffers }: MainPageProps) {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link header__logo-link--active">
-                <img
-                  className="header__logo"
-                  src="img/logo.svg"
-                  alt="6 cities logo"
-                  width="81"
-                  height="41"
-                />
-              </a>
+              <MainLogoLink />
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
@@ -44,9 +37,7 @@ function MainPage({ countRentOffers }: MainPageProps) {
                   </a>
                 </li>
                 <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
-                    <span className="header__signout">Sign out</span>
-                  </a>
+                  <LoginLink />
                 </li>
               </ul>
             </nav>
@@ -96,7 +87,7 @@ function MainPage({ countRentOffers }: MainPageProps) {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">312 places to stay in Amsterdam</b>
+              <b className="places__found">{`${generatedOffers.length} places to stay in Amsterdam`}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -123,9 +114,7 @@ function MainPage({ countRentOffers }: MainPageProps) {
                   </li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                
-              </div>
+              <CardList mockData={generatedOffers} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>

@@ -5,12 +5,24 @@ import { OfferType } from '../types';
 import { generatedOffers } from '../components/mocks/offers';
 import CardList from '../components/card-list';
 import { useParams } from 'react-router-dom';
+import ErrorPage from '../components/error-page';
+import ReviewsForm from '../components/reviews_form';
 
 type OfferProps = {
-  cardData: OfferType;
+  mockData: OfferType[];
 };
 
 function Offer(props: OfferProps) {
+  const params = useParams();
+  const current = params.id;
+
+  const data: OfferType | undefined = props.mockData.find(
+    (offer: OfferType) => offer.id === Number(current)
+  );
+
+  if (!data) {
+    return <ErrorPage />;
+  }
   const {
     header,
     description,
@@ -22,11 +34,8 @@ function Offer(props: OfferProps) {
     costPerNight,
     host,
     reviews,
-    id,
-  } = props.cardData;
-  const params = useParams();
-  const current = params.id;
-  console.log(current);
+  } = data;
+
   return (
     <div className="page">
       <Helmet>
@@ -219,7 +228,7 @@ function Offer(props: OfferProps) {
                     </div>
                   </li>
                 </ul>
-                {/* здесь буде компонент формы */}
+                {<ReviewsForm/>}
               </section>
             </div>
           </div>

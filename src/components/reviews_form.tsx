@@ -1,4 +1,18 @@
+import { useState } from 'react';
+import { ChangeEvent } from 'react';
+
 function ReviewsForm() {
+  const [rating, setRating] = useState(0);
+  const [commentText, setCommentText] = useState('');
+
+  const onRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    setRating(Number(evt.target.value));
+  };
+
+  const onCommentInput = (evt: ChangeEvent<HTMLTextAreaElement>) => {
+    setCommentText(evt.target.value);
+  };
+
   return (
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">
@@ -11,6 +25,7 @@ function ReviewsForm() {
           value="5"
           id="5-stars"
           type="radio"
+          onChange={onRatingChange}
         />
         <label
           htmlFor="5-stars"
@@ -28,6 +43,7 @@ function ReviewsForm() {
           value="4"
           id="4-stars"
           type="radio"
+          onChange={onRatingChange}
         />
         <label
           htmlFor="4-stars"
@@ -45,6 +61,7 @@ function ReviewsForm() {
           value="3"
           id="3-stars"
           type="radio"
+          onChange={onRatingChange}
         />
         <label
           htmlFor="3-stars"
@@ -62,6 +79,7 @@ function ReviewsForm() {
           value="2"
           id="2-stars"
           type="radio"
+          onChange={onRatingChange}
         />
         <label
           htmlFor="2-stars"
@@ -79,6 +97,7 @@ function ReviewsForm() {
           value="1"
           id="1-star"
           type="radio"
+          onChange={onRatingChange}
         />
         <label
           htmlFor="1-star"
@@ -95,6 +114,7 @@ function ReviewsForm() {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
+        onChange={onCommentInput}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -113,3 +133,5 @@ function ReviewsForm() {
     </form>
   );
 }
+
+export default ReviewsForm;

@@ -1,7 +1,7 @@
 import { OfferType } from '../types';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../components/consts';
-
+import { useParams } from 'react-router-dom';
 
 type CitiesCardProps = {
   cardData: OfferType;
@@ -13,7 +13,10 @@ function CitiesCard(props: CitiesCardProps) {
     props.cardData;
 
   const mouseEnterHandler = props.mouseEnterHandler;
-  return (
+  const params = useParams();
+  const current = params.id;
+
+  return !(Number(current) === id) && (
     <article
       onMouseEnter={() => mouseEnterHandler(id)}
       className="cities__card place-card"

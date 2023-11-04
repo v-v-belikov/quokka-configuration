@@ -9,26 +9,24 @@ import { AppRoute } from './consts';
 import { HelmetProvider } from 'react-helmet-async';
 import { OfferType } from '../types';
 import PrivateRoute from '../components/privite-route';
-import { generatedOffers } from './mocks/offers';
 
 type AppProps = {
-  countRentOffers: number;
   mockData: OfferType[];
 };
 
-function App({ countRentOffers, mockData }: AppProps) {
+function App({ mockData }: AppProps) {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<MainPage countRentOffers={countRentOffers} />}
+            element={<MainPage />}
           />
           <Route path={AppRoute.Login} element={<Login />} />
           <Route
             path={`${AppRoute.Offer}:id`}
-            element={<Offer cardData={mockData[1]} />}
+            element={<Offer mockData={mockData} />}
           />
           <Route
             path={AppRoute.Favorites}

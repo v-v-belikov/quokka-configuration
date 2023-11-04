@@ -6,11 +6,8 @@ import CardList from '../components/card-list';
 import LoginLink from '../components/login-link';
 import MainLogoLink from '../components/main-logo-link';
 
-type MainPageProps = {
-  countRentOffers: number;
-};
 
-function MainPage({ countRentOffers }: MainPageProps) {
+function MainPage() {
   return (
     <div className="page page--gray page--main">
       <Helmet>

@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { ChangeEvent } from 'react';
 
 function ReviewsForm() {
-  const [rating, setRating] = useState(0);
-  const [commentText, setCommentText] = useState('');
+  const [, setRating] = useState(0);
+  const [, setCommentText] = useState('');
 
   const onRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setRating(Number(evt.target.value));

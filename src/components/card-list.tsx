@@ -8,7 +8,7 @@ type CardListProps = {
 };
 
 function CardList(props: CardListProps) {
-  const [mouseOverState, setMouseOverState] = useState(0);
+  const [, setMouseOverState] = useState(0);
   return (
     <div className="cities__places-list places__list tabs__content">
       {props.mockData.map((data, index) => (

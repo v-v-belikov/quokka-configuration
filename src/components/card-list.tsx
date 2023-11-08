@@ -8,13 +8,13 @@ type CardListProps = {
 };
 
 function CardList(props: CardListProps) {
-  const [, setMouseOverState] = useState(0);
+  const [, setSelectedCardId] = useState(0);
   return (
     <div className="cities__places-list places__list tabs__content">
       {props.mockData.map((data, index) => (
         <CitiesCard
-          mouseEnterHandler={(id: number) => {
-            setMouseOverState(id);
+          onSelectCard={(id: number) => {
+            setSelectedCardId(id);
           }}
           cardData={data}
           key={index}

@@ -3,56 +3,46 @@
 import { generatedOffers } from '../components/mocks/offers';
 import { Helmet } from 'react-helmet-async';
 import CardList from '../components/card-list';
-import LoginLink from '../components/login-link';
-import MainLogoLink from '../components/main-logo-link';
-
+import MainHeader from '../components/main-header';
+import { Fragment } from 'react';
 
 function MainPage() {
+  const CITIES = [
+    'Paris',
+    'Cologne',
+    'Brussels',
+    'Amsterdam',
+    'Hamburg',
+    'Dusseldorf',
+  ];
   return (
     <div className="page page--gray page--main">
       <Helmet>
         <title>{'6 cities'}</title>
       </Helmet>
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <MainLogoLink />
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a
-                    className="header__nav-link header__nav-link--profile"
-                    href="#"
-                  >
-                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                    <span className="header__user-name user__name">
-                      Oliver.conner@gmail.com
-                    </span>
-                    <span className="header__favorite-count">3</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <LoginLink />
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <MainHeader />
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
+              {CITIES.map((city, index) => (
+                <Fragment key={index}>
+                  <li className="locations__item">
+                    <a
+                      className={`locations__item-link tabs__item${
+                        city === 'Amsterdam' && '--active'
+                      }`}
+                      href="#"
+                    >
+                      <span>{city}</span>
+                    </a>
+                  </li>
+                </Fragment>
+              ))}
+
+              {/* <li className="locations__item">
                 <a className="locations__item-link tabs__item" href="#">
                   <span>Cologne</span>
                 </a>
@@ -76,7 +66,7 @@ function MainPage() {
                 <a className="locations__item-link tabs__item" href="#">
                   <span>Dusseldorf</span>
                 </a>
-              </li>
+              </li> */}
             </ul>
           </section>
         </div>

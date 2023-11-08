@@ -14,21 +14,23 @@ function CityFavouriteItem(props: CityFavouriteItemProps) {
     (data) =>
       data.city.name === cityToDisplay
   );
-  return isFavourite && (
-    <li className="favorites__locations-items">
-      <div className="favorites__locations locations locations--current">
-        <div className="locations__item">
-          <a className="locations__item-link" href="#">
-            <span>{cityToDisplay}</span>
-          </a>
+  return (
+    isFavourite && (
+      <li className="favorites__locations-items">
+        <div className="favorites__locations locations locations--current">
+          <div className="locations__item">
+            <a className="locations__item-link" href="#">
+              <span>{cityToDisplay}</span>
+            </a>
+          </div>
         </div>
-      </div>
-      <div className="favorites__places">
-        {filteredCards.map((data, index) => (
-          <FavouriteCard favouriteCardData={data} key={index} />
-        ))}
-      </div>
-    </li>
+        <div className="favorites__places">
+          {filteredCards.map((data, index) => (
+            <FavouriteCard card={data} key={index} />
+          ))}
+        </div>
+      </li>
+    )
   );
 }
 

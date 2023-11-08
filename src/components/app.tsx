@@ -19,14 +19,11 @@ function App({ mockData }: AppProps) {
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route
-            path={AppRoute.Main}
-            element={<MainPage />}
-          />
+          <Route path={AppRoute.Main} element={<MainPage />} />
           <Route path={AppRoute.Login} element={<Login />} />
           <Route
             path={`${AppRoute.Offer}:id`}
-            element={<Offer mockData={mockData} />}
+            element={<Offer offer={mockData} />}
           />
           <Route
             path={AppRoute.Favorites}

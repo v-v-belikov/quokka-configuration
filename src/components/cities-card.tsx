@@ -5,20 +5,20 @@ import { useParams } from 'react-router-dom';
 
 type CitiesCardProps = {
   cardData: OfferType;
-  mouseEnterHandler: (id: number) => void;
+  onSelectCard: (id: number) => void;
 };
 
 function CitiesCard(props: CitiesCardProps) {
   const { image, header, isPrime, isFavourite, housingType, costPerNight, id } =
     props.cardData;
 
-  const mouseEnterHandler = props.mouseEnterHandler;
+  const onSelectCard = props.onSelectCard;
   const params = useParams();
   const current = params.id;
 
-  return !(Number(current) === id) && (
+  return Number(current) === id ? null : (
     <article
-      onMouseEnter={() => mouseEnterHandler(id)}
+      onMouseEnter={() => onSelectCard(id)}
       className="cities__card place-card"
     >
       {isPrime && (

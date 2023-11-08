@@ -1,6 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import LoginLink from '../components/login-link';
-import MainLogoLink from '../components/main-logo-link';
+import MainHeader from '../components/main-header';
 import { OfferType } from '../types';
 import { generatedOffers } from '../components/mocks/offers';
 import CardList from '../components/card-list';
@@ -9,15 +8,15 @@ import ErrorPage from '../components/error-page';
 import ReviewsForm from '../components/reviews_form';
 
 type OfferProps = {
-  mockData: OfferType[];
+  offer: OfferType[];
 };
 
 function Offer(props: OfferProps) {
   const params = useParams();
   const current = params.id;
 
-  const data: OfferType | undefined = props.mockData.find(
-    (offer: OfferType) => offer.id === Number(current)
+  const data = props.offer.find(
+    (offerItem: OfferType) => offerItem.id === Number(current)
   );
 
   if (!data) {
@@ -41,34 +40,7 @@ function Offer(props: OfferProps) {
       <Helmet>
         <title>{'6 cities - Offer'}</title>
       </Helmet>
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <MainLogoLink />
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a
-                    className="header__nav-link header__nav-link--profile"
-                    href="#"
-                  >
-                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                    <span className="header__user-name user__name">
-                      Oliver.conner@gmail.com
-                    </span>
-                    <span className="header__favorite-count">3</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <LoginLink />
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <MainHeader />
 
       <main className="page__main page__main--offer">
         <section className="offer">
@@ -228,7 +200,7 @@ function Offer(props: OfferProps) {
                     </div>
                   </li>
                 </ul>
-                {<ReviewsForm/>}
+                {<ReviewsForm />}
               </section>
             </div>
           </div>

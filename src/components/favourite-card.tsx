@@ -1,7 +1,7 @@
 import { OfferType } from '../types';
 
 type FavouriteCardProps = {
-  favouriteCardData: OfferType;
+  card: OfferType;
 };
 
 function FavouriteCard(props: FavouriteCardProps) {
@@ -12,7 +12,7 @@ function FavouriteCard(props: FavouriteCardProps) {
     isFavourite,
     housingType,
     costPerNight,
-  } = props.favouriteCardData;
+  } = props.card;
   return isFavourite && (
     <article className="favorites__card place-card">
       {isPrime && (

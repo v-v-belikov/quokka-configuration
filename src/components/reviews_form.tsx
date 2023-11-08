@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { ChangeEvent } from 'react';
 import { Fragment } from 'react';
 
+const a = 2;
+
 function ReviewsForm() {
   const [, setRating] = useState(0);
   const [, setCommentText] = useState('');

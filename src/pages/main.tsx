@@ -5,6 +5,9 @@ import { Helmet } from 'react-helmet-async';
 import CardList from '../components/card-list';
 import MainHeader from '../components/main-header';
 import { Fragment } from 'react';
+import Map from '../components/map';
+import { OfferType } from '../types';
+import { useRef, useEffect } from 'react';
 
 function MainPage() {
   const CITIES = [
@@ -15,20 +18,39 @@ function MainPage() {
     'Hamburg',
     'Dusseldorf',
   ];
+
+  const citiesListRef: React.RefObject<HTMLUListElement> | null = useRef(null);
+  // функция, которая возвращает название города, на странице которого каходимся
+  const currentActiveCity = function () {
+    for (let i = 0; i < citiesListRef.current.children.length; i++) {
+      const listItem = citiesListRef.current.children[i];
+      if (listItem.children[0].classList.contains('tabs__item--active')) {
+        return listItem.children[0].children[0].textContent;
+      }
+    }
+  };
+  // хук для работы с citiesListRef
+  useEffect(() => {
+    console.log(currentActiveCity());
+  }, []);
+
+  const currentCity = generatedOffers.find(
+    (offer) => offer.city.name === 'Amsterdam' // планируется записывать динамически тот город, у которого имеется класс tabs__item--active.
+  );
   return (
     <div className="page page--gray page--main">
       <Helmet>
         <title>{'6 cities'}</title>
       </Helmet>
       <MainHeader />
-
+      {console.log(citiesListRef.current)}
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              {CITIES.map((city, index) => (
-                <Fragment key={index}>
+            <ul ref={citiesListRef} className="locations__list tabs__list">
+              {CITIES.map((city) => (
+                <Fragment key={city}>
                   <li className="locations__item">
                     <a
                       className={`locations__item-link tabs__item${
@@ -41,32 +63,6 @@ function MainPage() {
                   </li>
                 </Fragment>
               ))}
-
-              {/* <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li> */}
             </ul>
           </section>
         </div>
@@ -104,7 +100,7 @@ function MainPage() {
               <CardList mockData={generatedOffers} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map city={currentCity.city} />
             </div>
           </div>
         </div>

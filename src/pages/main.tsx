@@ -6,10 +6,12 @@ import CardList from '../components/card-list';
 import MainHeader from '../components/main-header';
 import { Fragment } from 'react';
 import Map from '../components/map';
-import { OfferType } from '../types';
-import { useRef, useEffect } from 'react';
+type MainPageProps = {
+  setSelectedCardId: React.Dispatch<React.SetStateAction<number>>;
+  selectedCardId: number;
+};
 
-function MainPage() {
+function MainPage({ setSelectedCardId, selectedCardId }: MainPageProps) {
   const CITIES = [
     'Paris',
     'Cologne',
@@ -19,36 +21,17 @@ function MainPage() {
     'Dusseldorf',
   ];
 
-  const citiesListRef: React.RefObject<HTMLUListElement> | null = useRef(null);
-  // функция, которая возвращает название города, на странице которого каходимся
-  const currentActiveCity = function () {
-    for (let i = 0; i < citiesListRef.current.children.length; i++) {
-      const listItem = citiesListRef.current.children[i];
-      if (listItem.children[0].classList.contains('tabs__item--active')) {
-        return listItem.children[0].children[0].textContent;
-      }
-    }
-  };
-  // хук для работы с citiesListRef
-  useEffect(() => {
-    console.log(currentActiveCity());
-  }, []);
-
-  const currentCity = generatedOffers.find(
-    (offer) => offer.city.name === 'Amsterdam' // планируется записывать динамически тот город, у которого имеется класс tabs__item--active.
-  );
   return (
     <div className="page page--gray page--main">
       <Helmet>
         <title>{'6 cities'}</title>
       </Helmet>
       <MainHeader />
-      {console.log(citiesListRef.current)}
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul ref={citiesListRef} className="locations__list tabs__list">
+            <ul className="locations__list tabs__list">
               {CITIES.map((city) => (
                 <Fragment key={city}>
                   <li className="locations__item">
@@ -97,10 +80,13 @@ function MainPage() {
                   </li>
                 </ul>
               </form>
-              <CardList mockData={generatedOffers} />
+              <CardList
+                setSelectedCardId={setSelectedCardId}
+                mockData={generatedOffers}
+              />
             </section>
             <div className="cities__right-section">
-              <Map city={currentCity.city} />
+              <Map offers={generatedOffers} selectedCardId={selectedCardId} />
             </div>
           </div>
         </div>

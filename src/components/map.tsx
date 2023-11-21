@@ -1,16 +1,20 @@
 import { useRef, useEffect } from 'react';
 import useMap from '../hooks/use-map';
-import { OfferType } from '../types';
 import 'leaflet/dist/leaflet.css';
 import leaflet from 'leaflet';
 import { DEFAULT_OFFER_MAP_ICON, CURRENT_OFFER_MAP_ICON } from './consts';
+import { useAppSelector } from '../store';
 
 type MapProps = {
-  offers: OfferType[];
   selectedCardId: number;
 };
 
-function Map({ offers, selectedCardId }: MapProps) {
+function Map({ selectedCardId }: MapProps) {
+  const offers = useAppSelector((state) => state.offers);
+  const activetCity = useAppSelector((state) => state.activeCity);
+  const offersCurrentCity = offers.filter(
+    (offer) => offer.city.name === activetCity
+  );
   const currentOffer = offers.find((offer) => offer.city.name === 'Amsterdam');
   const currentCity = currentOffer?.city || {
     location: {

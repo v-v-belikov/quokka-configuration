@@ -1,6 +1,6 @@
-import { OfferType } from '../../types';
+import { TOffer } from '../../types';
 
-function generateMultipleOffers(count: number): OfferType[] {
+function generateMultipleOffers(count: number): TOffer[] {
   const images = [
     '../img/apartment-01.jpg',
     '../img/apartment-02.jpg',
@@ -32,7 +32,7 @@ function generateMultipleOffers(count: number): OfferType[] {
   const bedroomQuantities = [3, 5, 2, 1];
   const maxGuestValues = [5, 10, 3, 4];
   const costPerNightValues = [100, 150, 80, 120];
-  const cities = ['Amsterdam', 'Amsterdam', 'Amsterdam', 'Amsterdam'];
+  const cities = ['Amsterdam', 'Hamburg', 'Amsterdam', 'Amsterdam'];
   const cityCoordinates = [{ lat: 52.37403, lng: 4.88969, zoom: 12 }];
   const offerCoordinates = [
     { lat: 52.3909553943508, lng: 4.85309666406198 },

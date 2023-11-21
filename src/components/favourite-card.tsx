@@ -1,7 +1,7 @@
-import { OfferType } from '../types';
+import { TOffer } from '../types';
 
 type FavouriteCardProps = {
-  card: OfferType;
+  card: TOffer;
 };
 
 function FavouriteCard(props: FavouriteCardProps) {

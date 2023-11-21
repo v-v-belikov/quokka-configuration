@@ -1,9 +1,9 @@
 /* eslint-disable react/no-array-index-key */
 import FavouriteCard from '../components/favourite-card';
-import { OfferType } from '../types';
+import { TOffer } from '../types';
 
 type CityFavouriteItemProps = {
-  mockData: OfferType[];
+  mockData: TOffer[];
   cityToDisplay: string;
   isFavourite: boolean;
 };

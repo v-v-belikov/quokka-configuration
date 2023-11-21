@@ -1,26 +1,21 @@
 /* eslint-disable react/no-array-index-key */
-
-import { generatedOffers } from '../components/mocks/offers';
 import { Helmet } from 'react-helmet-async';
 import CardList from '../components/card-list';
 import MainHeader from '../components/main-header';
-import { Fragment } from 'react';
 import Map from '../components/map';
+import CitiesList from '../components/cities-list';
+import { useAppSelector } from '../store';
+
 type MainPageProps = {
   setSelectedCardId: React.Dispatch<React.SetStateAction<number>>;
   selectedCardId: number;
 };
 
 function MainPage({ setSelectedCardId, selectedCardId }: MainPageProps) {
-  const CITIES = [
-    'Paris',
-    'Cologne',
-    'Brussels',
-    'Amsterdam',
-    'Hamburg',
-    'Dusseldorf',
-  ];
-
+  const currentCity = useAppSelector((state) => state.activeCity);
+  const offersCurrentCity = useAppSelector((state) =>
+    state.offers.filter((offer) => offer.city.name === state.activeCity)
+  );
   return (
     <div className="page page--gray page--main">
       <Helmet>
@@ -31,29 +26,14 @@ function MainPage({ setSelectedCardId, selectedCardId }: MainPageProps) {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              {CITIES.map((city) => (
-                <Fragment key={city}>
-                  <li className="locations__item">
-                    <a
-                      className={`locations__item-link tabs__item${
-                        city === 'Amsterdam' && '--active'
-                      }`}
-                      href="#"
-                    >
-                      <span>{city}</span>
-                    </a>
-                  </li>
-                </Fragment>
-              ))}
-            </ul>
+            <CitiesList />
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{`${generatedOffers.length} places to stay in Amsterdam`}</b>
+              <b className="places__found">{`${offersCurrentCity.length} places to stay in ${currentCity}`}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -80,13 +60,10 @@ function MainPage({ setSelectedCardId, selectedCardId }: MainPageProps) {
                   </li>
                 </ul>
               </form>
-              <CardList
-                setSelectedCardId={setSelectedCardId}
-                mockData={generatedOffers}
-              />
+              <CardList setSelectedCardId={setSelectedCardId} />
             </section>
             <div className="cities__right-section">
-              <Map offers={generatedOffers} selectedCardId={selectedCardId} />
+              <Map selectedCardId={selectedCardId} />
             </div>
           </div>
         </div>

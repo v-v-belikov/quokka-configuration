@@ -11,27 +11,21 @@ type MapProps = {
 };
 
 function Map({ selectedCardId }: MapProps) {
-  const currentCity = useAppSelector((state) => state.activeCity);
+  const currentCity = useAppSelector((state) => state.selectedCityName);
   const offersCurrentCity = useAppSelector(getOffersByActiveCity);
-
-  // const offersCurrentCity = offers.filter(
-  //   (offer) => offer.city.name === activetCity
-  // );
   const currentOffer = offersCurrentCity.find(
     (offer) => offer.city.name === `${currentCity}`
   );
-  console.log(currentOffer);
-  const activetCity = currentOffer?.city || {
+  const activetCityLocation = currentOffer?.city || {
     location: {
-      lat: 52.37403,
-      lng: 4.88969,
+      lat: 48.864716,
+      lng: 2.349014,
       zoom: 12,
     },
-    name: 'Amsterdam',
+    name: 'Paris',
   };
-  console.log(activetCity);
   const mapRef = useRef(null);
-  const map = useMap(mapRef, activetCity);
+  const map = useMap(mapRef, activetCityLocation);
 
   const defaultCustomIcon = leaflet.icon({
     iconUrl: DEFAULT_OFFER_MAP_ICON,
@@ -46,6 +40,10 @@ function Map({ selectedCardId }: MapProps) {
   });
   useEffect(() => {
     if (map) {
+      map.setView(
+        [activetCityLocation.location.lat, activetCityLocation.location.lng],
+        12
+      );
       offersCurrentCity.forEach((offer) => {
         leaflet
           .marker(
@@ -63,7 +61,14 @@ function Map({ selectedCardId }: MapProps) {
           .addTo(map);
       });
     }
-  }, [map, offersCurrentCity, selectedCardId, defaultCustomIcon, currentCustomIcon]);
+  }, [
+    map,
+    activetCityLocation,
+    offersCurrentCity,
+    selectedCardId,
+    defaultCustomIcon,
+    currentCustomIcon,
+  ]);
 
   return <section className="cities__map map" ref={mapRef}></section>;
 }

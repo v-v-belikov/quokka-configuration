@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 
 import { Fragment } from 'react';
-import { useAppDispatch } from '../store';
+import { useAppDispatch, useAppSelector } from '../store';
 import { activeCityAction } from '../store/action';
 
 function CitiesList() {
@@ -13,6 +13,7 @@ function CitiesList() {
     'Hamburg',
     'Dusseldorf',
   ];
+  const currentCity = useAppSelector((state) => state.selectedCityName);
   const dispatch = useAppDispatch();
   return (
     <ul className="locations__list tabs__list">
@@ -20,7 +21,9 @@ function CitiesList() {
         <Fragment key={city}>
           <li className="locations__item">
             <a
-              className={'locations__item-link tabs__item'}
+              className={`locations__item-link tabs__item${
+                city === currentCity && '--active'
+              }`}
               href="#"
               onClick={() => {
                 dispatch(activeCityAction(city));

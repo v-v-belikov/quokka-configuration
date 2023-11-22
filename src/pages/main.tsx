@@ -12,7 +12,7 @@ type MainPageProps = {
 };
 
 function MainPage({ setSelectedCardId, selectedCardId }: MainPageProps) {
-  const currentCity = useAppSelector((state) => state.activeCity);
+  const currentCity = useAppSelector((state) => state.selectedCityName);
   const offersCurrentCity = useAppSelector(getOffersByActiveCity);
   return (
     <div className="page page--gray page--main">

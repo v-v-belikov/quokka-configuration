@@ -33,10 +33,15 @@ function generateMultipleOffers(count: number): TOffer[] {
   const maxGuestValues = [5, 10, 3, 4];
   const costPerNightValues = [100, 150, 80, 120];
   const cities = ['Amsterdam', 'Hamburg', 'Amsterdam', 'Amsterdam'];
-  const cityCoordinates = [{ lat: 52.37403, lng: 4.88969, zoom: 12 }];
+  const cityCoordinates = [
+    { lat: 52.37403, lng: 4.88969, zoom: 12 },
+    { lat: 65.37403, lng: 4.88969, zoom: 12 },
+    { lat: 57.37403, lng: 4.88969, zoom: 12 },
+    { lat: 59.37403, lng: 4.88969, zoom: 12 },
+  ];
   const offerCoordinates = [
     { lat: 52.3909553943508, lng: 4.85309666406198 },
-    { lat: 52.3609553943508, lng: 4.85309666406198 },
+    { lat: 62.3609553943508, lng: 4.85309666406198 },
     { lat: 52.3909553943508, lng: 4.929309666406198 },
     { lat: 52.3809553943508, lng: 4.939309666406198 },
   ];
@@ -63,7 +68,7 @@ function generateMultipleOffers(count: number): TOffer[] {
     maxGuest: maxGuestValues[i],
     costPerNight: costPerNightValues[i],
     city: {
-      location: cityCoordinates[0],
+      location: cityCoordinates[i],
       name: cities[i],
     },
     site: offerCoordinates[i],

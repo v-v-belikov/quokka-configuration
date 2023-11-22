@@ -5,7 +5,7 @@ import MainHeader from '../components/main-header';
 import Map from '../components/map';
 import CitiesList from '../components/cities-list';
 import { useAppSelector } from '../store';
-
+import { getOffersByActiveCity } from '../store/reduser';
 type MainPageProps = {
   setSelectedCardId: React.Dispatch<React.SetStateAction<number>>;
   selectedCardId: number;
@@ -13,9 +13,7 @@ type MainPageProps = {
 
 function MainPage({ setSelectedCardId, selectedCardId }: MainPageProps) {
   const currentCity = useAppSelector((state) => state.activeCity);
-  const offersCurrentCity = useAppSelector((state) =>
-    state.offers.filter((offer) => offer.city.name === state.activeCity)
-  );
+  const offersCurrentCity = useAppSelector(getOffersByActiveCity);
   return (
     <div className="page page--gray page--main">
       <Helmet>

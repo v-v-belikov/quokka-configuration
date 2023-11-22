@@ -3,6 +3,7 @@ import { CITIES_MAP } from '../components/consts';
 import { TOffer } from '../types';
 import { activeCityAction, updateOffersAction } from '../store/action';
 import { generatedOffers } from '../components/mocks/offers';
+import { State } from '../store/index';
 const initialState: {
   activeCity: string;
   offers: TOffer[];
@@ -20,3 +21,5 @@ export const reducer = createReducer(initialState, (builder) => {
       state.offers = action.payload;
     });
 });
+
+export const getOffersByActiveCity = ({ offers, activeCity }: State) => offers.filter((offer) => offer.city.name === activeCity);

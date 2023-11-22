@@ -4,19 +4,24 @@ import 'leaflet/dist/leaflet.css';
 import leaflet from 'leaflet';
 import { DEFAULT_OFFER_MAP_ICON, CURRENT_OFFER_MAP_ICON } from './consts';
 import { useAppSelector } from '../store';
+import { getOffersByActiveCity } from '../store/reduser';
 
 type MapProps = {
   selectedCardId: number;
 };
 
 function Map({ selectedCardId }: MapProps) {
-  const offers = useAppSelector((state) => state.offers);
-  const activetCity = useAppSelector((state) => state.activeCity);
-  const offersCurrentCity = offers.filter(
-    (offer) => offer.city.name === activetCity
+  const currentCity = useAppSelector((state) => state.activeCity);
+  const offersCurrentCity = useAppSelector(getOffersByActiveCity);
+
+  // const offersCurrentCity = offers.filter(
+  //   (offer) => offer.city.name === activetCity
+  // );
+  const currentOffer = offersCurrentCity.find(
+    (offer) => offer.city.name === `${currentCity}`
   );
-  const currentOffer = offers.find((offer) => offer.city.name === 'Amsterdam');
-  const currentCity = currentOffer?.city || {
+  console.log(currentOffer);
+  const activetCity = currentOffer?.city || {
     location: {
       lat: 52.37403,
       lng: 4.88969,
@@ -24,8 +29,9 @@ function Map({ selectedCardId }: MapProps) {
     },
     name: 'Amsterdam',
   };
+  console.log(activetCity);
   const mapRef = useRef(null);
-  const map = useMap(mapRef, currentCity);
+  const map = useMap(mapRef, activetCity);
 
   const defaultCustomIcon = leaflet.icon({
     iconUrl: DEFAULT_OFFER_MAP_ICON,
@@ -40,7 +46,7 @@ function Map({ selectedCardId }: MapProps) {
   });
   useEffect(() => {
     if (map) {
-      offers.forEach((offer) => {
+      offersCurrentCity.forEach((offer) => {
         leaflet
           .marker(
             {
@@ -57,7 +63,7 @@ function Map({ selectedCardId }: MapProps) {
           .addTo(map);
       });
     }
-  }, [map, offers, selectedCardId, defaultCustomIcon, currentCustomIcon]);
+  }, [map, offersCurrentCity, selectedCardId, defaultCustomIcon, currentCustomIcon]);
 
   return <section className="cities__map map" ref={mapRef}></section>;
 }

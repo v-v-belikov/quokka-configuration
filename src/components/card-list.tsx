@@ -1,17 +1,15 @@
 /* eslint-disable react/no-array-index-key */
 import CitiesCard from '../components/cities-card';
 import { useAppSelector } from '../store';
+import { getOffersByActiveCity } from '../store/reduser';
 
 type CardListProps = {
   setSelectedCardId: React.Dispatch<React.SetStateAction<number>>;
 };
 
 function CardList({ setSelectedCardId }: CardListProps) {
-  const currentCity = useAppSelector((state) => state.activeCity);
-  const offers = useAppSelector((state) => state.offers);
-  const offersCurrentCity = offers.filter(
-    (offer) => offer.city.name === currentCity
-  );
+  const offersCurrentCity = useAppSelector(getOffersByActiveCity);
+
   return (
     <div className="cities__places-list places__list tabs__content">
       {offersCurrentCity.map((data, index) => (

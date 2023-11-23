@@ -19,7 +19,7 @@ export type Host = {
   id: number;
 }
 
-export type TOffer = {
+export type OfferModel = {
   image: string;
   smalllImage: string;
   header: string;

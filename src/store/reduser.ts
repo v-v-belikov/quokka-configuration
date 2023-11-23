@@ -1,12 +1,11 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { CITIES_MAP } from '../components/consts';
-import { TOffer } from '../types';
+import { OfferModel } from '../types';
 import { activeCityAction, updateOffersAction } from '../store/action';
-import { generatedOffers } from '../components/mocks/offers';
-import { State } from '../store/index';
+import { generatedOffers } from '../mocks/offers';
 const initialState: {
   selectedCityName: string;
-  offers: TOffer[];
+  offers: OfferModel[];
 } = {
   selectedCityName: CITIES_MAP.Paris,
   offers: generatedOffers,
@@ -21,6 +20,3 @@ export const reducer = createReducer(initialState, (builder) => {
       state.offers = action.payload;
     });
 });
-
-export const getOffersByActiveCity = ({ offers, selectedCityName }: State) =>
-  offers.filter((offer) => offer.city.name === selectedCityName);

@@ -1,14 +1,26 @@
-import { useRef, useEffect } from 'react';
+import { useEffect } from 'react';
 import useMap from '../hooks/use-map';
 import 'leaflet/dist/leaflet.css';
 import leaflet from 'leaflet';
 import { DEFAULT_OFFER_MAP_ICON, CURRENT_OFFER_MAP_ICON } from './consts';
 import { useAppSelector } from '../store';
-import { getOffersByActiveCity } from '../store/reduser';
+import { getOffersByActiveCity } from '../utils/utils';
 
 type MapProps = {
   selectedCardId: number;
 };
+
+const defaultCustomIcon = leaflet.icon({
+  iconUrl: DEFAULT_OFFER_MAP_ICON,
+  iconSize: [27, 39],
+  iconAnchor: [13.5, 39],
+});
+
+const currentCustomIcon = leaflet.icon({
+  iconUrl: CURRENT_OFFER_MAP_ICON,
+  iconSize: [27, 39],
+  iconAnchor: [13.5, 39],
+});
 
 function Map({ selectedCardId }: MapProps) {
   const currentCity = useAppSelector((state) => state.selectedCityName);
@@ -24,20 +36,9 @@ function Map({ selectedCardId }: MapProps) {
     },
     name: 'Paris',
   };
-  const mapRef = useRef(null);
-  const map = useMap(mapRef, activetCityLocation);
 
-  const defaultCustomIcon = leaflet.icon({
-    iconUrl: DEFAULT_OFFER_MAP_ICON,
-    iconSize: [27, 39],
-    iconAnchor: [13.5, 39],
-  });
+  const { map, mapRef } = useMap(activetCityLocation);
 
-  const currentCustomIcon = leaflet.icon({
-    iconUrl: CURRENT_OFFER_MAP_ICON,
-    iconSize: [27, 39],
-    iconAnchor: [13.5, 39],
-  });
   useEffect(() => {
     if (map) {
       map.setView(

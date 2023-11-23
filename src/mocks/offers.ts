@@ -1,6 +1,6 @@
-import { TOffer } from '../../types';
+import { OfferModel } from '../types';
 
-function generateMultipleOffers(count: number): TOffer[] {
+function generateMultipleOffers(count: number): OfferModel[] {
   const images = [
     '../img/apartment-01.jpg',
     '../img/apartment-02.jpg',

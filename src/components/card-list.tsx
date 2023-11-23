@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import CitiesCard from '../components/cities-card';
 import { useAppSelector } from '../store';
-import { getOffersByActiveCity } from '../store/reduser';
+import { getOffersByActiveCity } from '../utils/utils';
 
 type CardListProps = {
   setSelectedCardId: React.Dispatch<React.SetStateAction<number>>;

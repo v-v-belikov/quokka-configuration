@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import MainHeader from '../components/main-header';
-import { TOffer } from '../types';
+import { OfferModel } from '../types';
 import CardList from '../components/card-list';
 import { useParams } from 'react-router-dom';
 import ErrorPage from '../components/error-page';
@@ -16,7 +16,7 @@ function Offer({ setSelectedCardId }: OfferProps) {
   const params = useParams();
   const current = params.id;
   const data = offers.find(
-    (offerItem: TOffer) => offerItem.id === Number(current)
+    (offerItem: OfferModel) => offerItem.id === Number(current)
   );
 
   if (!data) {

@@ -16,4 +16,5 @@ const CITIES_MAP = {
   Hamburg: 'Hamburg',
   Dusseldorf: 'Dusseldorf',
 } as const;
+
 export { AppRoute, DEFAULT_OFFER_MAP_ICON, CURRENT_OFFER_MAP_ICON, CITIES_MAP };

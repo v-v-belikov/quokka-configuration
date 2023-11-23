@@ -1,5 +1,5 @@
 import { createAction} from '@reduxjs/toolkit';
-import { TOffer } from '../types';
+import { OfferModel } from '../types';
 
 export const activeCityAction = createAction<string>('selectCity');
-export const updateOffersAction = createAction<TOffer[]>('updateOffers');
+export const updateOffersAction = createAction<OfferModel[]>('updateOffers');

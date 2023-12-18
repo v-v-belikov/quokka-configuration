@@ -8,6 +8,7 @@ import { AppRoute } from './consts';
 import { HelmetProvider } from 'react-helmet-async';
 import PrivateRoute from '../components/privite-route';
 import { useState } from 'react';
+import { ViteNodeServer } from 'vite-node/server';
 
 function App() {
   const [selectedCardId, setSelectedCardId] = useState(0);

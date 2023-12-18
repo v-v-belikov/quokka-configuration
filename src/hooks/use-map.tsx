@@ -9,11 +9,14 @@ type UseMapResult = {
 
 function useMap(city: City):UseMapResult {
   const [map, setMap] = useState<L.Map | null>(null);
-  const isRenderedRef = useRef<boolean>(false);
+  // const isRenderedRef = useRef<boolean>(false);
+  const [isRenderedRef, setIsRenderedRef] = useState(false);
   const mapRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if (mapRef.current !== null && !isRenderedRef.current) {
+    // if (mapRef.current !== null && !isRenderedRef.current) {
+    if (mapRef.current !== null && !isRenderedRef) {
+      console.log("useEffectWorking")
       const instance = leaflet.map(mapRef.current, {
         center: {
           lat: city.location.lat,
@@ -32,9 +35,16 @@ function useMap(city: City):UseMapResult {
         )
         .addTo(instance);
       setMap(instance);
-      isRenderedRef.current = true;
+      // isRenderedRef.current = true;
+      setIsRenderedRef(true);
+
+      return () => {
+        if (mapRef.current) {
+          mapRef.current.remove();
+        }
+      };
     }
-  }, [city]);
+  }, []);
 
   return { map, mapRef };
 }

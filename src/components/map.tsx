@@ -37,14 +37,15 @@ function Map({ selectedCardId }: MapProps) {
     name: 'Paris',
   };
 
+  console.log('Рендер');
   const { map, mapRef } = useMap(activetCityLocation);
 
   useEffect(() => {
     if (map) {
-      map.setView(
-        [activetCityLocation.location.lat, activetCityLocation.location.lng],
-        12
-      );
+      // map.setView(
+      //   [activetCityLocation.location.lat, activetCityLocation.location.lng],
+      //   12
+      // );
       offersCurrentCity.forEach((offer) => {
         leaflet
           .marker(
@@ -61,6 +62,8 @@ function Map({ selectedCardId }: MapProps) {
           )
           .addTo(map);
       });
+
+      
     }
   }, [
     map,
